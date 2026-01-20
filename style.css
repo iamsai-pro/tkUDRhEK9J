@@ -1,0 +1,120 @@
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #008080; /* Teal desktop background */
+  font-family: "MS Sans Serif", "Tahoma", sans-serif;
+  color: #000000;
+}
+
+.desktop {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.window {
+  position: absolute;
+  border: 2px outset #ffffff;
+  background-color: #c0c0c0; /* Classic gray background */
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+.window.minimized {
+    height: 30px; /* Only title bar visible */
+    overflow: hidden;
+}
+
+.window.minimized .window-content {
+    display: none;
+}
+
+
+.title-bar {
+  background-color: #000080; /* Blue title bars */
+  color: #ffffff;
+  padding: 4px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: grab;
+  user-select: none;
+  border-bottom: 2px outset #ffffff;
+}
+
+.title-bar .title {
+  font-weight: bold;
+}
+
+.title-bar .buttons {
+  display: flex;
+}
+
+.window-btn {
+  background-color: #c0c0c0;
+  border: 2px outset #ffffff;
+  color: #000000;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0px 5px;
+  margin-left: 3px;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.window-btn:active {
+  border-style: inset;
+}
+
+.window-btn.close-btn {
+    background-color: #c00000;
+    color: white;
+}
+
+
+.window-content {
+  padding: 15px;
+  flex-grow: 1;
+  overflow-y: auto;
+  border-top: 2px inset #ffffff;
+}
+
+.window-content p {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.window-content strong {
+    font-weight: bold;
+}
+
+.window-content a {
+    color: #000080;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.window-content a:hover {
+    color: #ff0000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .window {
+    width: 90%;
+    left: 5% !important;
+    top: 10% !important;
+    max-height: 80vh;
+  }
+  .window-content {
+    padding: 10px;
+  }
+}
