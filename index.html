@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Windows 95 Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="desktop">
+
+    <div id="about-me-window" class="window" style="left: 50px; top: 50px; z-index: 1;">
+      <div class="title-bar">
+        <span class="title">About Me</span>
+        <div class="buttons">
+          <button class="minimize-btn window-btn">-</button>
+          <button class="close-btn window-btn">❌</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <p>Work for an organization that provides me the opportunity to improve my skills and knowledge to grow along with the organization’s objective.</p>
+      </div>
+    </div>
+
+    <div id="education-window" class="window" style="left: 100px; top: 100px; z-index: 2;">
+      <div class="title-bar">
+        <span class="title">Education</span>
+        <div class="buttons">
+          <button class="minimize-btn window-btn">-</button>
+          <button class="close-btn window-btn">❌</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <p><strong>Bachelor of Engineering, Computer Science and Engineering</strong><br>
+        R.M.D Engineering College, Chennai<br>
+        2022 - 2026<br>
+        CGPA: 7.71*</p>
+        <p><strong>Higher Secondary School</strong><br>
+        Narayana Jr. college, Nellore<br>
+        2020 - 2022<br>
+        Percentage: 92.6</p>
+        <p><strong>Secondary Education</strong><br>
+        Vivekananda H.S<br>
+        2020<br>
+        Percentage: 76.17</p>
+      </div>
+    </div>
+
+    <div id="skills-window" class="window" style="left: 150px; top: 150px; z-index: 3;">
+      <div class="title-bar">
+        <span class="title">Technical Strengths</span>
+        <div class="buttons">
+          <button class="minimize-btn window-btn">-</button>
+          <button class="close-btn window-btn">❌</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <p><strong>Programming Languages:</strong> Python 3, Java</p>
+        <p><strong>Frameworks:</strong> Flask, Spring Boot, React js</p>
+        <p><strong>Web Technologies:</strong> HTML, CSS, Bootstrap, Tailwindcss</p>
+        <p><strong>Database:</strong> Structured Query Language (SQL)</p>
+        <p><strong>Web Tools:</strong> Github, Git</p>
+      </div>
+    </div>
+
+    <div id="projects-window" class="window" style="left: 200px; top: 200px; z-index: 4;">
+      <div class="title-bar">
+        <span class="title">Projects</span>
+        <div class="buttons">
+          <button class="minimize-btn window-btn">-</button>
+          <button class="close-btn window-btn">❌</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <p><strong>Full-Stack Firebase User Portfolio System</strong><br>
+        Developed user authentication, profile management, and file upload features using Firebase Authentication, Realtime Database & Storage. Built a clean and responsive UI using HTML and CSS to ensure user-friendly interface. Created an admin dashboard in Flask to manage user lifecycle (CRUD operations), leading to clean and structured data handling.</p>
+        <p><strong>Representation and Symbols of Nucleotide Sequence Data</strong><br>
+        Developed a tool that converts any input text into a DNA-base sequence (A, C, G, T) and displays the output in four distinct colours.</p>
+      </div>
+    </div>
+
+    <div id="certifications-window" class="window" style="left: 250px; top: 250px; z-index: 5;">
+      <div class="title-bar">
+        <span class="title">Certifications</span>
+        <div class="buttons">
+          <button class="minimize-btn window-btn">-</button>
+          <button class="close-btn window-btn">❌</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <p>DATA BASE MANAGEMENT SYSTEM - NPTEL</p>
+        <p>Responsive Web Design - freeCodeCamp</p>
+      </div>
+    </div>
+
+    <div id="contact-window" class="window" style="left: 300px; top: 300px; z-index: 6;">
+      <div class="title-bar">
+        <span class="title">Contact</span>
+        <div class="buttons">
+          <button class="minimize-btn window-btn">-</button>
+          <button class="close-btn window-btn">❌</button>
+        </div>
+      </div>
+      <div class="window-content">
+        <p>B-11-582, Chennuru road, Buchi reddy palem</p>
+        <p>(+91)7032671918</p>
+        <p>subrahmanyadheeraj1918@gmail.com</p>
+        <p>Github: <a href="https://github.com/dheeraj1918" target="_blank">dheeraj1918</a></p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const windows = document.querySelectorAll('.window');
+    let activeWindow = null;
+    let offsetX, offsetY;
+    let isDragging = false;
+
+    function bringToFront(windowElement) {
+      if (activeWindow && activeWindow !== windowElement) {
+        activeWindow.style.zIndex = parseInt(windowElement.style.zIndex) - 1;
+      }
+      windowElement.style.zIndex = 1000;
+      activeWindow = windowElement;
+    }
+
+    windows.forEach(windowElement => {
+      const titleBar = windowElement.querySelector('.title-bar');
+      const closeBtn = windowElement.querySelector('.close-btn');
+      const minimizeBtn = windowElement.querySelector('.minimize-btn');
+
+      titleBar.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains('window-btn')) return;
+
+        isDragging = true;
+        bringToFront(windowElement);
+        offsetX = e.clientX - windowElement.getBoundingClientRect().left;
+        offsetY = e.clientY - windowElement.getBoundingClientRect().top;
+        windowElement.style.cursor = 'grabbing';
+      });
+
+      closeBtn.addEventListener('click', () => {
+        windowElement.style.display = 'none';
+      });
+
+      minimizeBtn.addEventListener('click', () => {
+        windowElement.classList.toggle('minimized');
+        const content = windowElement.querySelector('.window-content');
+        if (content) {
+            content.style.display = windowElement.classList.contains('minimized') ? 'none' : 'block';
+        }
+      });
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const currentWindow = activeWindow;
+      if (!currentWindow) return;
+
+      const newX = e.clientX - offsetX;
+      const newY = e.clientY - offsetY;
+
+      currentWindow.style.left = `${newX}px`;
+      currentWindow.style.top = `${newY}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        if (activeWindow) {
+          activeWindow.style.cursor = 'grab';
+        }
+      }
+    });
+
+    windows.forEach(windowElement => {
+      windowElement.addEventListener('mousedown', () => {
+        bringToFront(windowElement);
+      });
+    });
+
+    document.querySelectorAll('.window-btn').forEach(btn => {
+      btn.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const initialWindows = document.querySelectorAll('.window');
+        initialWindows.forEach((win, index) => {
+            bringToFront(win);
+            win.style.zIndex = 100 + index;
+        });
+    });
+  </script>
+
+</body>
+</html>
